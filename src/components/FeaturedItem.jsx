@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Card, Button, Table } from "react-bootstrap";
 
 export default function FeaturedItem(props) {
     const [flip, setFlip] = useState(false);
@@ -8,13 +9,14 @@ export default function FeaturedItem(props) {
     };
 
     return (
-        <div>
+        <Card style={{ width: "25rem", padding: "2rem" }}>
             <img src={props.img} alt={props.name} />
-            <h2>{props.name}</h2>
-            <p>${props.price} per unit</p>
+            <h1>{props.name}</h1>
+            <h5>${props.price} per unit</h5>
             <p>{props.description}</p>
+            <h5>Nutrition Facts</h5>
             {flip ?
-                <table>
+                <Table>
                     <thead>
                         <tr>
                             <th>Calories</th>
@@ -31,11 +33,14 @@ export default function FeaturedItem(props) {
                             <td>{props.nutrition.protein ?? "0g"}</td>
                         </tr>
                     </tbody>
-                </table>
+                </Table>
             :   <div></div>}
-            <button onClick={clickToFlip}>
+            <Button
+                onClick={clickToFlip}
+                variant={flip ? "secondary" : "primary"}
+            >
                 {flip ? "Hide Nutrition Facts" : "Show Nutrition Facts"}
-            </button>
-        </div>
+            </Button>
+        </Card>
     );
 }
